@@ -1,0 +1,10 @@
+{
+  "rewrites": [
+    { "source": "/api/:path*", "destination": "https://smartqr-api.onrender.com/api/:path*" },
+    { "source": "/r/:path*", "destination": "https://smartqr-api.onrender.com/r/:path*" },
+    { "source": "/d/:path*", "destination": "https://smartqr-api.onrender.com/d/:path*" },
+    { "source": "/view/:path*", "destination": "/index.html" },
+    { "source": "/view/slug/:path*", "destination": "/index.html" },
+    { "source": "/(.*)", "destination": "/index.html" }
+  ]
+}
