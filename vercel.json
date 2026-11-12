@@ -1,8 +1,10 @@
 {
+  "buildCommand": "npm run build -w client",
+  "outputDirectory": "client/dist",
   "rewrites": [
-    { "source": "/api/:path*", "destination": "https://qr-code-smart-cariola.onrender.com/api/:path*" },
-    { "source": "/r/:path*", "destination": "https://qr-code-smart-cariola.onrender.com/r/:path*" },
-    { "source": "/d/:path*", "destination": "https://qr-code-smart-cariola.onrender.com/d/:path*" },
+    { "source": "/api/:path*", "destination": "https://onrender.com*" },
+    { "source": "/r/:path*", "destination": "https://onrender.com*" },
+    { "source": "/d/:path*", "destination": "https://onrender.com*" },
     { "source": "/view/:path*", "destination": "/index.html" },
     { "source": "/view/slug/:path*", "destination": "/index.html" },
     { "source": "/(.*)", "destination": "/index.html" }
