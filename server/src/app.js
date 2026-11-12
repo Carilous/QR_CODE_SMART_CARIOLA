@@ -14,14 +14,12 @@ import urlRoutes from './routes/urls.routes.js';
 import publicRoutes from './routes/public.routes.js';
 import { InvalidPdfError } from './services/pdfValidation.js';
 
-import dns from 'node:dns';
 
-// Fixes the ECONNREFUSED error from your last step
-dns.setServers(["1.1.1.1", "8.8.8.8"]); 
 
 
 
 const app = express();
+app.set('trust proxy', 1);
 
 const isProduction = process.env.NODE_ENV === 'production';
 
