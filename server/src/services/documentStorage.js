@@ -19,10 +19,20 @@ function localPath(storageKey) {
   return target;
 }
 
+let s3Client;
+
 function getS3Config() {
-  const { AWS_REGION, S3_BUCKET } = process.env;
+  const { AWS_REGION, S3_BUCKET, S3_ENDPOINT } = process.env;
   if (!AWS_REGION || !S3_BUCKET) throw new Error('S3 document storage is not configured.');
-  return { bucket: S3_BUCKET, client: new S3Client({ region: AWS_REGION }) };
+  if (!s3Client) {
+    s3Client = new S3Client({
+      region: AWS_REGION,
+      ...(S3_ENDPOINT ? { endpoint: S3_ENDPOINT, forcePathStyle: true } : {}),
+      requestChecksumCalculation: 'WHEN_REQUIRED',
+      responseChecksumValidation: 'WHEN_REQUIRED',
+    });
+  }
+  return { bucket: S3_BUCKET, client: s3Client };
 }
 
 export async function storeDocument(storageKey, buffer) {
@@ -40,7 +50,6 @@ export async function storeDocument(storageKey, buffer) {
     Key: storageKey,
     Body: buffer,
     ContentType: 'application/pdf',
-    ServerSideEncryption: 'AES256',
   }));
 }
 
